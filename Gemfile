@@ -8,8 +8,4 @@ group :development do
   gem "bundler"
   gem "jeweler", "~> 1.8.3"
   gem "simplecov", require: false
-
-  # For performance comparison:
-  gem "nokogiri"
-  gem "builder"
 end
