@@ -1,0 +1,96 @@
+= Xbuilder
+
+Xbuilder is an API-compatible Builder implementation using <tt>libxml</tt>. Also it's almost <b>2 times faster</b> than Builder and Nokogiri (see <tt>test/performance.rb</tt> output for details).
+
+Feel free to open an issue on any incompatibility with Builder API. The list of known incompatibilities is given below.
+
+== Usage
+
+Xbuilder supports almost all of the Builder's features. Here is a small example:
+
+  xml = Xbuilder.new(indent: 2)
+  xml.node attr: 1 do |xml|     #=> <node attr="1">
+    xml.ns :child, attr: 2      #=>   <ns:child attr="2"/>
+  end                           #=> </node>
+
+== With Rails
+
+  # some.xml.xbuilder
+  xml.node do |xml|
+    # The first argument is your partial name, the second is a hash of locals.
+    xml.partial!("partial", value: 1)
+  end
+
+  # _partial.xml.xbuilder
+  xml.child(value)
+
+will render:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <node><child>1</child></node>
+
+== Notes
+
+* Child blocks with 0 arguments are not supported. So, instead of:
+
+    xml.node do
+      xml.node
+    end
+
+  write:
+
+    xml.node do |xml|
+      xml.node
+    end
+
+* XML instruction will be added automatically.
+
+    xml = Xbuilder.new(encoding: "ISO-8859-1")
+    xml.node "test"
+    puts xml.target!
+
+  will print:
+
+    <?xml version="1.0" encoding="ISO-8859-1"?>
+    <node>test</node>
+
+* <tt>libxml-ruby</tt> gem has an issue ({#46}[https://github.com/xml4r/libxml-ruby/pull/46]) with node content encoding:
+
+    xml.esc "escaped & text"
+    #=> without fix: <esc>escaped </esc>
+    #=> with fix: <esc>escaped &amp; text</esc>
+
+  For now I've used temporary workaround (see <tt>Xbuilder#__escape</tt>).
+
+
+== Incompatibilities With Builder
+
+* Builder-like unescaped symbol attributes are not supported.
+  It's currently a restriction of <tt>libxml</tt> (see <tt>xmlAttrSerializeContent</tt> implementation).
+
+    xml.node(attr: :"&esc") #=> <node attr="&amp;esc"/>
+
+* Custom XML processing instructions are not supported yet. Instruction will be auto-generated depending on
+  encoding and version provided.
+
+* XML entity declarations are not yet supported.
+
+== Contributing to Xbuilder
+
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
+* Fork the project.
+* Start a feature/bugfix branch.
+* Commit and push until you are happy with your contribution.
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== Authors
+
+Builder gem was created by Jim Weirich.
+
+Xbuilder gem was created by Nikita Afanasenko. The project is hosted on Github: http://github.com/nikitug/xbuilder.
+
+Copyright © 2012 Nikita Afanasenko, released under the MIT license.
+
+* http://www.opensource.org/licenses/MIT
