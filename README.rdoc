@@ -1,4 +1,4 @@
-= Xbuilder
+= Xbuilder {<img src="https://secure.travis-ci.org/nikitug/xbuilder.png" />}[http://travis-ci.org/nikitug/xbuilder]
 
 Xbuilder is an API-compatible Builder implementation using <tt>libxml</tt>. Also it's almost <b>2 times faster</b> than Builder and Nokogiri (see <tt>test/performance.rb</tt> output for details).
 
