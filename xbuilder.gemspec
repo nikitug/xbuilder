@@ -14,6 +14,17 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
+  s.files = [
+    "Gemfile",
+    "README.rdoc",
+    "Rakefile",
+    "lib/xbuilder.rb",
+    "lib/xbuilder_template.rb",
+    "test/helper.rb",
+    "test/performance.rb",
+    "test/test_xbuilder.rb",
+    "xbuilder.gemspec"
+  ]
   s.homepage = "http://github.com/nikitug/xbuilder"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.15"
