@@ -22,9 +22,9 @@ class XbuilderTemplate < Xbuilder
   private
 
   def __new_instance(*args)
-    super.tap do |xml|
-      xml.__instance_variable_set(:@context, @context)
-    end
+    xml = super
+    xml.__instance_variable_set(:@context, @context)
+    xml
   end
 
 end
@@ -46,4 +46,4 @@ class XbuilderHandler
   end
 end
 
-ActionView::Template.register_template_handler :xbuilder, XbilderHandler
+ActionView::Template.register_template_handler :xbuilder, XbuilderHandler

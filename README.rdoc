@@ -54,14 +54,6 @@ will render:
     <?xml version="1.0" encoding="ISO-8859-1"?>
     <node>test</node>
 
-* <tt>libxml-ruby</tt> gem has an issue ({#46}[https://github.com/xml4r/libxml-ruby/pull/46]) with node content encoding:
-
-    xml.esc "escaped & text"
-    #=> without fix: <esc>escaped </esc>
-    #=> with fix: <esc>escaped &amp; text</esc>
-
-  For now I've used temporary workaround (see <tt>Xbuilder#__escape</tt>).
-
 
 == Incompatibilities With Builder
 

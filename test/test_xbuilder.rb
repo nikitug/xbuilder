@@ -166,7 +166,7 @@ class TestAttributeEscaping < Test::Unit::TestCase
 
   def test_element_amp2
     @xml.title('&amp;')
-    assert_equal '<title>&amp;</title>', without_instruct(@xml.target!)
+    assert_equal '<title>&amp;amp;</title>', without_instruct(@xml.target!)
   end
 
   def test_attr_less

@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc"]
 
   s.add_runtime_dependency "blankslate"
-  s.add_runtime_dependency "libxml-ruby", ">= 2.3.3"
+  s.add_runtime_dependency "libxml-ruby", ">= 2.3.4"
 
   s.add_development_dependency "rdoc", "~> 3.12"
   s.add_development_dependency "rake"
