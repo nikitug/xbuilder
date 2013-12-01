@@ -46,4 +46,4 @@ class XbuilderHandler
   end
 end
 
-ActionView::Template.register_template_handler :xbuilder, XbilderHandler
+ActionView::Template.register_template_handler :xbuilder, XbuilderHandler
