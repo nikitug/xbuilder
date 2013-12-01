@@ -61,9 +61,7 @@ class Xbuilder < BlankSlate
       ::Kernel.raise ::ArgumentError, "Cannot mix a text argument with a block"
     end
 
-    # FIXME `__escape` is a temp solution till bugfix release.
-    # https://github.com/xml4r/libxml-ruby/pull/46
-    node.content = __escape(text) if text
+    node.content = text if text
 
     if block
       unless block.arity > 0
@@ -143,20 +141,6 @@ class Xbuilder < BlankSlate
   end
 
   private
-
-  def __escape(text)
-    text.tap do |t|
-      t.gsub!(/&(?![a-zA-Z]+;)|<|>|'|"/) do |match|
-        case match
-        when "&" then "&amp;"
-        when "<" then "&lt;"
-        when ">" then "&gt;"
-        when "'" then "&apos;"
-        when '"' then "&quot;"
-        end
-      end
-    end
-  end
 
   def __append_node(node)
     if @root.kind_of?(XML::Document)
